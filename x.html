@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Department Patrons | NAMSSN SAZU</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              orange: "#f97316",
+              blue: "#0284c7",
+              dark: "#0f172a"
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+
+  <!-- Google Font -->
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+    body {
+      font-family: "Inter", sans-serif;
+    }
+
+    .tab-content {
+      animation: fadeIn 0.25s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body
+  class="bg-slate-950 text-slate-100 antialiased selection:bg-orange-500 selection:text-white flex flex-col min-h-screen"
+>
+
+  <!-- =========================================================
+        NAVIGATION
+  ========================================================== -->
+
+  <header
+    class="bg-slate-900/95 border-b border-slate-800 text-white px-6 py-3.5 sticky top-0 z-40 backdrop-blur-md"
+  >
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+
+      <!-- Brand Logo & Name -->
+      <a
+        href="index.html"
+        class="flex items-center gap-3 group"
+        aria-label="NAMSSN SAZU Home"
+      >
+        <!-- NAMSSN Logo Image Container -->
+        <div class="w-11 h-11 flex-shrink-0 rounded-full overflow-hidden bg-white/10 p-0.5 border border-slate-700 group-hover:border-orange-500 transition-colors">
+          <!-- Replace 'IMAGES/namssn-logo.png' with the actual path to your NAMSSN logo image file -->
+          <img 
+            src="IMAGES/images.png" 
+            alt="NAMSSN Logo" 
+            class="w-full h-full object-cover rounded-full"
+          />
+        </div>
+
+        <!-- Brand Name -->
+        <div class="flex flex-col justify-center">
+          <div
+            class="
+              font-black
+              text-base
+              tracking-[0.18em]
+              leading-none
+              text-white
+            "
+          >
+            NAMSSN
+          </div>
+          <div class="flex items-center gap-1.5 mt-1">
+            <span class="w-4 h-px bg-orange-500"></span>
+            <span
+              class="
+                text-[9px]
+                uppercase
+                font-bold
+                text-sky-400
+                tracking-[0.16em]
+              "
+            >SAZU CHAPTER
+            </span>
+          </div>
+        </div>
+      </a>
+
+
+      <!-- =====================================================
+           DESKTOP NAVIGATION
+      ====================================================== -->
+
+      <nav
+        class="
+          hidden
+          md:flex
+          items-center
+          space-x-7
+          text-sm
+          font-medium
+          text-slate-300
+        "
+      >
+        <a href="index.html" class="hover:text-sky-400 transition">
+          Home
+        </a>
+
+        <a href="about.html" class="hover:text-sky-400 transition">
+          About
+        </a>
+
+        <a href="events.html" class="hover:text-sky-400 transition">
+          Events
+        </a>
+
+        <a href="gallery.html" class="hover:text-sky-400 transition">
+          Gallery
+        </a>
+
+        <a href="contact.html" class="hover:text-sky-400 transition">
+          Contact
+        </a>
+
+        <!-- Explore Dropdown -->
+        <div class="relative group py-2">
+          <button
+            class="
+              flex
+              items-center
+              space-x-1
+              hover:text-sky-400
+              transition
+              focus:outline-none
+            "
+          >
+            <span>Explore</span>
+            <i
+              class="
+                fa-solid
+                fa-chevron-down
+                text-[10px]
+                opacity-70
+                group-hover:rotate-180
+                transition-transform
+                duration-200
+              "
+            ></i>
+          </button>
+
+          <div
+            class="
+              absolute
+              left-0
+              mt-2
+              w-56
+              bg-slate-900
+              border
+              border-slate-800
+              rounded-xl
+              shadow-2xl
+              py-2
+              hidden
+              group-hover:block
+              z-50
+            "
+          >
+            <a
+              href="resources.html"
+              class="
+                flex
+                items-center
+                px-4
+                py-2.5
+                text-xs
+                text-slate-300
+                hover:bg-slate-800
+                hover:text-sky-400
+              "
+            >
+              <i class="fa-solid fa-book-bookmark w-5 text-sky-400"></i>
+              Course Resources
+            </a>
+
+            <a
+              href="past-questions.html"
+              class="
+                flex
+                items-center
+                px-4
+                py-2.5
+                text-xs
+                text-slate-300
+                hover:bg-slate-800
+                hover:text-sky-400
+              "
+            >
+              <i class="fa-solid fa-file-lines w-5 text-sky-400"></i>
+              Past Questions Archive
+            </a>
+
+            <a
+              href="constitution.html"
+              class="
+                flex
+                items-center
+                px-4
+                py-2.5
+                text-xs
+                text-slate-300
+                hover:bg-slate-800
+                hover:text-sky-400
+              "
+            >
+              <i class="fa-solid fa-gavel w-5 text-sky-400"></i>
+              Constitution
+            </a>
+          </div>
+        </div>
+
+
+        <!-- Executives Dropdown -->
+        <div class="relative group py-2">
+          <button
+            class="
+              flex
+              items-center
+              space-x-1
+              text-orange-400
+              font-semibold
+              focus:outline-none
+            "
+          >
+            <span>Executives</span>
+            <i
+              class="
+                fa-solid
+                fa-chevron-down
+                text-[10px]
+                opacity-70
+                group-hover:rotate-180
+                transition-transform
+                duration-200
+              "
+            ></i>
+          </button>
+
+          <div
+            class="
+              absolute
+              right-0
+              mt-2
+              w-60
+              bg-slate-900
+              border
+              border-slate-800
+              rounded-xl
+              shadow-2xl
+              py-2
+              hidden
+              group-hover:block
+              z-50
+            "
+          >
+            <button
+              onclick="switchTab('patrons')"
+              class="
+                w-full
+                flex
+                items-center
+                px-4
+                py-2.5
+                text-xs
+                text-slate-300
+                hover:bg-slate-800
+                hover:text-orange-400
+                text-left
+              "
+            >
+              <i class="fa-solid fa-award w-5 text-orange-400"></i>
+              Patrons
+            </button>
+
+            <button
+              onclick="switchTab('lecturers')"
+              class="
+                w-full
+                flex
+                items-center
+                px-4
+                py-2.5
+                text-xs
+                text-slate-300
+                hover:bg-slate-800
+                hover:text-orange-400
+                text-left
+              "
+            >
+              <i class="fa-solid fa-chalkboard-user w-5 text-orange-400"></i>
+              Lecturers
+            </button>
+
+            <button
+              onclick="switchTab('executives')"
+              class="
+                w-full
+                flex
+                items-center
+                px-4
+                py-2.5
+                text-xs
+                text-slate-300
+                hover:bg-slate-800
+                hover:text-orange-400
+                text-left
+              "
+            >
+              <i class="fa-solid fa-users w-5 text-orange-400"></i>
+              Student Executives
+            </button>
+          </div>
+        </div>
+      </nav>
+
+
+      <!-- Theme + Mobile Controls -->
+      <div class="flex items-center space-x-3">
+        <button
+          id="theme-toggle"
+          class="
+            p-2
+            text-slate-400
+            hover:text-white
+            rounded-full
+            hover:bg-slate-800
+            transition
+          "
+          aria-label="Toggle theme"
+        >
+          <i id="theme-icon" class="fa-regular fa-sun text-base"></i>
+        </button>
+
+        <button
+          id="mobile-menu-btn"
+          class="
+            md:hidden
+            p-2
+            text-slate-300
+            hover:text-white
+          "
+          aria-label="Open navigation menu"
+        >
+          <i class="fa-solid fa-bars text-lg"></i>
+        </button>
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MOBILE NAVIGATION
+    ====================================================== -->
+
+    <div
+      id="mobile-menu"
+      class="
+        hidden
+        md:hidden
+        border-t
+        border-slate-800
+        mt-3
+        pt-3
+        pb-4
+        px-2
+        space-y-2
+      "
+    >
+      <a
+        href="index.html"
+        class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-800"
+      >
+        Home
+      </a>
+      <a
+        href="about.html"
+        class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-800"
+      >
+        About
+      </a>
+      <a
+        href="events.html"
+        class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-800"
+      >
+        Events
+      </a>
+      <a
+        href="gallery.html"
+        class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-800"
+      >
+        Gallery
+      </a>
+      <a
+        href="contact.html"
+        class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-800"
+      >
+        Contact
+      </a>
+
+      <div class="border-t border-slate-800 pt-2 mt-2">
+        <p
+          class="
+            px-3
+            py-2
+            text-[10px]
+            uppercase
+            tracking-widest
+            text-slate-500
+            font-bold
+          "
+        >
+          Executives
+        </p>
+
+        <button
+          onclick="switchTab('patrons'); toggleMobileMenu();"
+          class="w-full text-left block px-3 py-2 rounded-lg text-sm hover:bg-slate-800"
+        >
+          Patrons
+        </button>
+        <button
+          onclick="switchTab('lecturers'); toggleMobileMenu();"
+          class="w-full text-left block px-3 py-2 rounded-lg text-sm hover:bg-slate-800"
+        >
+          Lecturers
+        </button>
+        <button
+          onclick="switchTab('executives'); toggleMobileMenu();"
+          class="w-full text-left block px-3 py-2 rounded-lg text-sm hover:bg-slate-800"
+        >
+          Student Executives
+        </button>
+      </div>
+    </div>
+
+  </header>
+
+
+  <!-- =========================================================
+        MAIN
+  ========================================================== -->
+
+  <main class="flex-grow">
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+    <section
+      class="
+        bg-gradient-to-b
+        from-sky-950/40
+        via-slate-900
+        to-slate-950
+        border-b
+        border-slate-800
+        py-14
+        md:py-20
+        px-6
+        text-center
+      "
+    >
+      <div class="max-w-4xl mx-auto space-y-4">
+        <span
+          class="
+            inline-block
+            px-3
+            py-1
+            text-xs
+            font-extrabold
+            uppercase
+            tracking-widest
+            text-sky-400
+            bg-sky-950/80
+            rounded-full
+            border
+            border-sky-800/60
+          "
+        >
+          2025/2026 Academic Session
+        </span>
+
+        <h1
+          class="
+            text-4xl
+            md:text-6xl
+            font-black
+            text-white
+            tracking-tight
+          "
+        >
+          Department Patrons
+        </h1>
+
+        <p
+          class="
+            text-slate-400
+            text-sm
+            md:text-base
+            max-w-xl
+            mx-auto
+            leading-relaxed
+          "
+        >
+          Meet the patrons, lecturers and student leaders supporting
+          the NAMSSN SAZU community.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         TAB SWITCHER
+    ====================================================== -->
+    <section
+      class="
+        py-5
+        bg-slate-900/60
+        border-b
+        border-slate-800
+        px-6
+        sticky
+        top-[68px]
+        z-30
+        backdrop-blur-md
+      "
+    >
+      <div
+        class="
+          max-w-xl
+          mx-auto
+          bg-slate-950/80
+          p-1.5
+          rounded-full
+          border
+          border-slate-800/80
+          flex
+          justify-between
+          items-center
+          text-xs
+          md:text-sm
+          font-semibold
+          shadow-inner
+        "
+      >
+        <button
+          id="btn-patrons"
+          class="
+            tab-btn
+            flex-1
+            py-2.5
+            px-3
+            rounded-full
+            transition-all
+            duration-200
+            text-slate-400
+            hover:text-white
+          "
+          onclick="switchTab('patrons')"
+        >
+          Patrons
+        </button>
+
+        <button
+          id="btn-lecturers"
+          class="
+            tab-btn
+            flex-1
+            py-2.5
+            px-3
+            rounded-full
+            transition-all
+            duration-200
+            text-slate-400
+            hover:text-white
+          "
+          onclick="switchTab('lecturers')"
+        >
+          Lecturers
+        </button>
+
+        <button
+          id="btn-executives"
+          class="
+            tab-btn
+            flex-1
+            py-2.5
+            px-3
+            rounded-full
+            transition-all
+            duration-200
+            text-slate-400
+            hover:text-white
+          "
+          onclick="switchTab('executives')"
+        >
+          Student Execs
+        </button>
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         CONTENT CONTAINER
+    ====================================================== -->
+    <div class="max-w-7xl mx-auto px-6 py-12">
+
+      <!-- ===================================================
+           PATRONS
+      ==================================================== -->
+      <section id="content-patrons" class="tab-content space-y-8">
+        <div class="border-b border-slate-800 pb-4">
+          <h2 class="text-2xl md:text-3xl font-extrabold text-white">
+            Departmental Patrons
+          </h2>
+          <p class="text-slate-400 text-sm mt-1">
+            Guiding and fostering the vision of mathematical sciences students.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <!-- PATRON 1 -->
+          <div
+            class="
+              bg-slate-900
+              border
+              border-slate-800
+              rounded-2xl
+              overflow-hidden
+              hover:border-orange-500/50
+              transition
+              duration-300
+              flex
+              flex-col
+              justify-between
+            "
+          >
+            <div>
+              <div class="h-64 overflow-hidden bg-slate-950 relative">
+                <img
+                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600&auto=format&fit=crop"
+                  alt="Grand Patron"
+                  class="w-full h-full object-cover"
+                />
+                <span
+                  class="
+                    absolute
+                    top-3
+                    right-3
+                    px-3
+                    py-1
+                    bg-orange-500
+                    text-white
+                    text-[10px]
+                    font-extrabold
+                    uppercase
+                    tracking-wider
+                    rounded-full
+                    shadow-md
+                  "
+                >
+                  Grand Patron
+                </span>
+              </div>
+
+              <div class="p-6 space-y-2">
+                <h3 class="text-xl font-bold text-white">
+                  Prof. A. O. Olubummo
+                </h3>
+                <p class="text-xs text-sky-400 font-semibold">
+                  Dean, Faculty of Science
+                </p>
+                <p class="text-slate-400 text-xs leading-relaxed pt-2">
+                  Providing institutional patronage, academic direction,
+                  and overall structural guidance to the student body.
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="
+                p-6
+                pt-0
+                border-t
+                border-slate-800/60
+                mt-4
+                flex
+                justify-between
+                items-center
+                text-xs
+                text-slate-400
+              "
+            >
+              <span>Faculty Representative</span>
+              <a href="mailto:" class="hover:text-orange-400 transition">
+                <i class="fa-regular fa-envelope mr-1"></i> Email
+              </a>
+            </div>
+          </div>
+
+          <!-- PATRON 2 -->
+          <div
+            class="
+              bg-slate-900
+              border
+              border-slate-800
+              rounded-2xl
+              overflow-hidden
+              hover:border-sky-500/50
+              transition
+              duration-300
+              flex
+              flex-col
+              justify-between
+            "
+          >
+            <div>
+              <div class="h-64 overflow-hidden bg-slate-950 relative">
+                <img
+                  src="IMAGES/PRESIDENT.jpeg"
+                  alt="Staff Patron"
+                  class="w-full h-full object-cover"
+                />
+                <span
+                  class="
+                    absolute
+                    top-3
+                    right-3
+                    px-3
+                    py-1
+                    bg-sky-600
+                    text-white
+                    text-[10px]
+                    font-extrabold
+                    uppercase
+                    tracking-wider
+                    rounded-full
+                    shadow-md
+                  "
+                >
+                  Staff Patron
+                </span>
+              </div>
+
+              <div class="p-6 space-y-2">
+                <h3 class="text-xl font-bold text-white">
+                  Dr. E. K. Ajayi
+                </h3>
+                <p class="text-xs text-sky-400 font-semibold">
+                  Associate Professor of Applied Mathematics
+                </p>
+                <p class="text-slate-400 text-xs leading-relaxed pt-2">
+                  Advising student executive leadership on welfare
+                  initiatives, academic competitions, and research projects.
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="
+                p-6
+                pt-0
+                border-t
+                border-slate-800/60
+                mt-4
+                flex
+                justify-between
+                items-center
+                text-xs
+                text-slate-400
+              "
+            >
+              <span>Faculty Adviser</span>
+              <a href="mailto:eajayi@unilag.edu.ng" class="hover:text-sky-400 transition">
+                <i class="fa-regular fa-envelope mr-1"></i> Email
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ===================================================
+           LECTURERS
+      ==================================================== -->
+      <section id="content-lecturers" class="tab-content hidden space-y-8">
+        <div class="border-b border-slate-800 pb-4">
+          <h2 class="text-2xl md:text-3xl font-extrabold text-white">
+            Departmental Lecturers
+          </h2>
+          <p class="text-slate-400 text-sm mt-1">
+            Meet the academic staff supporting teaching, research and student development.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <!-- LECTURER 1 -->
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-sky-500/50 transition group">
+            <div class="relative h-60 overflow-hidden bg-slate-950">
+              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=600&auto=format&fit=crop" alt="Lecturer" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+              <span class="absolute top-3 right-3 px-3 py-1 bg-sky-600 text-white text-[10px] font-extrabold uppercase rounded-full">Lecturer</span>
+            </div>
+            <div class="p-5">
+              <h3 class="text-base font-bold text-white">Dr. Department Lecturer</h3>
+              <p class="text-xs text-sky-400 font-medium mt-1">Mathematics</p>
+              <p class="text-slate-400 text-xs leading-relaxed mt-3">Academic staff member supporting teaching, research and student development.</p>
+            </div>
+          </div>
+
+          <!-- LECTURER 2 -->
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-orange-500/50 transition group">
+            <div class="relative h-60 overflow-hidden bg-slate-950">
+              <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=600&auto=format&fit=crop" alt="Lecturer" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+              <span class="absolute top-3 right-3 px-3 py-1 bg-orange-500 text-white text-[10px] font-extrabold uppercase rounded-full">Lecturer</span>
+            </div>
+            <div class="p-5">
+              <h3 class="text-base font-bold text-white">Prof. Department Lecturer</h3>
+              <p class="text-xs text-sky-400 font-medium mt-1">Statistics</p>
+              <p class="text-slate-400 text-xs leading-relaxed mt-3">Academic staff member supporting lectures, research and academic mentorship.</p>
+            </div>
+          </div>
+
+          <!-- LECTURER 3 -->
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-emerald-500/50 transition group">
+            <div class="relative h-60 overflow-hidden bg-slate-950">
+              <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=600&auto=format&fit=crop" alt="Lecturer" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+              <span class="absolute top-3 right-3 px-3 py-1 bg-emerald-600 text-white text-[10px] font-extrabold uppercase rounded-full">Lecturer</span>
+            </div>
+            <div class="p-5">
+              <h3 class="text-base font-bold text-white">Dr. Department Lecturer</h3>
+              <p class="text-xs text-sky-400 font-medium mt-1">Applied Mathematics</p>
+              <p class="text-slate-400 text-xs leading-relaxed mt-3">Academic staff member focused on teaching, research and student mentorship.</p>
+            </div>
+          </div>
+
+          <!-- LECTURER 4 -->
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-purple-500/50 transition group">
+            <div class="relative h-60 overflow-hidden bg-slate-950">
+              <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=600&auto=format&fit=crop" alt="Lecturer" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+              <span class="absolute top-3 right-3 px-3 py-1 bg-purple-600 text-white text-[10px] font-extrabold uppercase rounded-full">Lecturer</span>
+            </div>
+            <div class="p-5">
+              <h3 class="text-base font-bold text-white">Dr. Department Lecturer</h3>
+              <p class="text-xs text-sky-400 font-medium mt-1">Statistics</p>
+              <p class="text-slate-400 text-xs leading-relaxed mt-3">Academic staff member supporting teaching, research and academic development.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ===================================================
+           STUDENT EXECUTIVES
+      ==================================================== -->
+      <section id="content-executives" class="tab-content hidden space-y-8">
+        <div class="border-b border-slate-800 pb-4">
+          <h2 class="text-2xl md:text-3xl font-extrabold text-white">
+            Student Executives
+          </h2>
+          <p class="text-slate-400 text-sm mt-1">
+            Meet the student leaders managing the affairs of NAMSSN SAZU for the session.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center space-y-3">
+            <div class="w-24 h-24 mx-auto rounded-full overflow-hidden bg-slate-950 border-2 border-orange-500">
+              <img src="IMAGES/PRESIDENT.jpeg" alt="President" class="w-full h-full object-cover" />
+            </div>
+            <h3 class="text-lg font-bold text-white">Comrade President</h3>
+            <p class="text-xs text-orange-400 font-semibold uppercase tracking-wider">President</p>
+            <p class="text-slate-400 text-xs">Directing executive operations and serving as the primary student voice.</p>
+          </div>
+
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center space-y-3">
+            <div class="w-24 h-24 mx-auto rounded-full overflow-hidden bg-slate-950 border-2 border-sky-500">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" alt="Vice President" class="w-full h-full object-cover" />
+            </div>
+            <h3 class="text-lg font-bold text-white">Comrade VP</h3>
+            <p class="text-xs text-sky-400 font-semibold uppercase tracking-wider">Vice President</p>
+            <p class="text-slate-400 text-xs">Assisting administrative duties and overseeing departmental committees.</p>
+          </div>
+
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center space-y-3">
+            <div class="w-24 h-24 mx-auto rounded-full overflow-hidden bg-slate-950 border-2 border-emerald-500">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&auto=format&fit=crop" alt="General Secretary" class="w-full h-full object-cover" />
+            </div>
+            <h3 class="text-lg font-bold text-white">Comrade Secretary</h3>
+            <p class="text-xs text-emerald-400 font-semibold uppercase tracking-wider">General Secretary</p>
+            <p class="text-slate-400 text-xs">Managing correspondence, meeting records, and official documentation.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- =========================================================
+        FOOTER
+  ========================================================== -->
+  <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 text-xs py-8 px-6 text-center">
+    <div class="max-w-7xl mx-auto space-y-3">
+      <p class="font-medium text-slate-300">NAMSSN SAZU Chapter &copy; 2026. All rights reserved.</p>
+      <p>Nigerian Association of Mathematical and Sciences Students of Nigeria.</p>
+    </div>
+  </footer>
+
+
+  <!-- =========================================================
+        JAVASCRIPT SCRIPTS
+  ========================================================== -->
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    function toggleMobileMenu() {
+      mobileMenu.classList.toggle('hidden');
+    }
+
+    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+    // Tab switching logic
+    function switchTab(tabId) {
+      // Hide all contents
+      document.querySelectorAll('.tab-content').forEach(el => {
+        el.classList.add('hidden');
+      });
+
+      // Remove active states from buttons
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-orange-500', 'text-white', 'shadow');
+        btn.classList.add('text-slate-400');
+      });
+
+      // Show targeted content
+      const targetContent = document.getElementById('content-' + tabId);
+      if (targetContent) {
+        targetContent.classList.remove('hidden');
+      }
+
+      // Highlight corresponding tab button if it exists
+      const targetBtn = document.getElementById('btn-' + tabId);
+      if (targetBtn) {
+        targetBtn.classList.remove('text-slate-400');
+        targetBtn.classList.add('bg-orange-500', 'text-white', 'shadow');
+      }
+
+      // Update URL query parameters cleanly without reload
+      const url = new URL(window.location);
+      url.searchParams.set('tab', tabId);
+      window.history.pushState({}, '', url);
+    }
+
+    // Check URL query on page load to handle direct tab links
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const tabParam = params.get('tab');
+      if (tabParam && ['patrons', 'lecturers', 'executives'].includes(tabParam)) {
+        switchTab(tabParam);
+      } else {
+        switchTab('patrons'); // Default tab
+      }
+    });
+  </script>
+
+</body>
+</html>

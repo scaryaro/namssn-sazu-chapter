@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NAMSSN SAZU Chapter</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- FontAwesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    >
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           BRAND LOGO
+        ========================== */
+
+        .brand-logo {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+            border-radius: 10px;
+            background: white;
+            padding: 3px;
+            display: block;
+        }
+
+        /* =========================
+           MOBILE MENU
+        ========================== */
+
+        #mobile-menu {
+            display: none;
+        }
+
+        #mobile-menu.active {
+            display: block;
+        }
+
+        /* =========================
+           HERO OVERLAY
+        ========================== */
+
+        .hero-section {
+            min-height: 600px;
+        }
+    </style>
+</head>
+
+
+<body class="bg-slate-900 text-slate-100 font-sans antialiased">
+
+
+    <!-- =====================================================
+         NAVIGATION BAR
+    ====================================================== -->
+
+    <header class="bg-slate-950 border-b border-slate-800 sticky top-0 z-50">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="h-20 flex items-center justify-between">
+
+
+                <!-- =========================
+                     LOGO + BRAND
+                ========================== -->
+
+                <a
+                    href="index.html"
+                    class="flex items-center gap-3 group"
+                >
+
+                    <!-- Logo -->
+                    <img
+                        src="IMAGES/IMAGES.png"
+                        alt="NAMSSN SAZU Logo"
+                        class="brand-logo"
+                    >
+
+
+                    <!-- Brand Text -->
+                    <div class="flex flex-col leading-tight">
+
+                        <span
+                            class="text-xl md:text-2xl font-extrabold tracking-wider text-white group-hover:text-sky-400 transition duration-300"
+                        >
+                            NAMSSN
+                        </span>
+
+                        <span
+                            class="text-xs md:text-sm font-medium text-sky-400"
+                        >
+                            SAZU Chapter
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <!-- =========================
+                     DESKTOP NAVIGATION
+                ========================== -->
+
+                <nav
+                    class="hidden md:flex items-center space-x-7 text-sm font-medium"
+                >
+
+                    <a
+                        href="index.html"
+                        class="text-sky-400 font-semibold"
+                    >
+                        Home
+                    </a>
+
+                    <a
+                        href="about.html"
+                        class="text-slate-300 hover:text-sky-400 transition duration-300"
+                    >
+                        About
+                    </a>
+
+                    <a
+                        href="events.html"
+                        class="text-slate-300 hover:text-sky-400 transition duration-300"
+                    >
+                        Events
+                    </a>
+
+                    <a
+                        href="gallery.html"
+                        class="text-slate-300 hover:text-sky-400 transition duration-300"
+                    >
+                        Gallery
+                    </a>
+
+                    <a
+                        href="x.html"
+                        class="text-slate-300 hover:text-sky-400 transition duration-300"
+                    >
+                        Executives
+                    </a>
+
+                    <a
+                        href="contact.html"
+                        class="text-slate-300 hover:text-sky-400 transition duration-300"
+                    >
+                        Contact
+                    </a>
+
+                </nav>
+
+
+                <!-- =========================
+                     MOBILE MENU BUTTON
+                ========================== -->
+
+                <button
+                    id="menu-button"
+                    type="button"
+                    aria-label="Open navigation menu"
+                    class="md:hidden text-slate-300 hover:text-white focus:outline-none"
+                >
+
+                    <i class="fa-solid fa-bars text-2xl"></i>
+
+                </button>
+
+            </div>
+
+
+            <!-- =========================
+                 MOBILE NAVIGATION
+            ========================== -->
+
+            <div
+                id="mobile-menu"
+                class="md:hidden border-t border-slate-800 py-4"
+            >
+
+                <nav class="flex flex-col space-y-2">
+
+                    <a
+                        href="index.html"
+                        class="px-4 py-3 rounded-lg bg-sky-500/10 text-sky-400 font-semibold"
+                    >
+                        <i class="fa-solid fa-house mr-3"></i>
+                        Home
+                    </a>
+
+                    <a
+                        href="about.html"
+                        class="px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-900 hover:text-sky-400 transition"
+                    >
+                        <i class="fa-solid fa-circle-info mr-3"></i>
+                        About
+                    </a>
+
+                    <a
+                        href="events.html"
+                        class="px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-900 hover:text-sky-400 transition"
+                    >
+                        <i class="fa-solid fa-calendar-days mr-3"></i>
+                        Events
+                    </a>
+
+                    <a
+                        href="gallery.html"
+                        class="px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-900 hover:text-sky-400 transition"
+                    >
+                        <i class="fa-solid fa-images mr-3"></i>
+                        Gallery
+                    </a>
+
+                    <a
+                        href="x.html"
+                        class="px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-900 hover:text-sky-400 transition"
+                    >
+                        <i class="fa-solid fa-users mr-3"></i>
+                        Executives
+                    </a>
+
+                    <a
+                        href="contact.html"
+                        class="px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-900 hover:text-sky-400 transition"
+                    >
+                        <i class="fa-solid fa-envelope mr-3"></i>
+                        Contact
+                    </a>
+
+                </nav>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         HERO SECTION
+    ====================================================== -->
+
+    <section
+        class="hero-section relative bg-slate-900 text-white py-24 bg-cover bg-center flex items-center"
+        style="background-image: url('images/group.jpeg');"
+    >
+
+        <!-- Dark Overlay -->
+        <div class="absolute inset-0 bg-slate-950/80"></div>
+
+
+        <!-- Hero Content -->
+        <div
+            class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full"
+        >
+
+            <!-- Small Label -->
+            <div
+                class="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-400 text-sm font-medium"
+            >
+
+                <i class="fa-solid fa-graduation-cap"></i>
+
+                <span>
+                    Sa'adu Zungur University Chapter
+                </span>
+
+            </div>
+
+
+            <!-- Main Heading -->
+            <h1
+                class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6"
+            >
+
+                Welcome to NAMSSN
+
+                <span class="text-sky-400 block md:inline">
+                    SAZU Chapter
+                </span>
+
+            </h1>
+
+
+            <!-- Description -->
+            <p
+                class="max-w-2xl mx-auto text-lg md:text-xl text-slate-300 mb-8 leading-relaxed"
+            >
+                Empowering the next generation of mathematical minds at
+                Sa'adu Zungur University through academic excellence,
+                collaboration, and innovation.
+            </p>
+
+
+            <!-- Buttons -->
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+
+                <a
+                    href="about.html"
+                    class="bg-sky-500 hover:bg-sky-600 text-white font-semibold px-7 py-3.5 rounded-lg transition duration-300 flex items-center justify-center gap-2"
+                >
+
+                    <span>
+                        Learn More
+                    </span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+
+                <a
+                    href="contact.html"
+                    class="border border-slate-600 hover:bg-slate-800 hover:border-slate-500 text-white font-semibold px-7 py-3.5 rounded-lg transition duration-300 flex items-center justify-center gap-2"
+                >
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <span>
+                        Contact Us
+                    </span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FEATURES SECTION
+    ====================================================== -->
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+
+        <!-- Section Heading -->
+        <div class="text-center mb-12">
+
+            <span
+                class="text-sky-400 text-sm font-semibold uppercase tracking-widest"
+            >
+                What We Do
+            </span>
+
+            <h2
+                class="text-3xl md:text-4xl font-bold text-white mt-2 mb-4"
+            >
+                Building Mathematical Excellence
+            </h2>
+
+            <p
+                class="max-w-2xl mx-auto text-slate-400 text-sm md:text-base"
+            >
+                We provide students with opportunities to learn,
+                collaborate, compete, and grow within the mathematical
+                sciences community.
+            </p>
+
+        </div>
+
+
+
+        <!-- Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+
+            <!-- =========================
+                 ACADEMIC EXCELLENCE
+            ========================== -->
+
+            <div
+                class="bg-slate-950 border border-slate-800 p-7 rounded-xl hover:border-sky-500/40 hover:-translate-y-1 transition duration-300"
+            >
+
+                <div
+                    class="w-14 h-14 rounded-xl bg-sky-500/10 text-sky-400 text-2xl flex items-center justify-center mb-5"
+                >
+
+                    <i class="fa-solid fa-book-open"></i>
+
+                </div>
+
+                <h3
+                    class="text-xl font-bold mb-3 text-white"
+                >
+                    Academic Excellence
+                </h3>
+
+                <p
+                    class="text-slate-400 text-sm leading-relaxed"
+                >
+                    Fostering deep understanding and proficiency in
+                    mathematical sciences through collaborative study,
+                    tutorials, and academic support.
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 COMMUNITY
+            ========================== -->
+
+            <div
+                class="bg-slate-950 border border-slate-800 p-7 rounded-xl hover:border-sky-500/40 hover:-translate-y-1 transition duration-300"
+            >
+
+                <div
+                    class="w-14 h-14 rounded-xl bg-sky-500/10 text-sky-400 text-2xl flex items-center justify-center mb-5"
+                >
+
+                    <i class="fa-solid fa-users"></i>
+
+                </div>
+
+                <h3
+                    class="text-xl font-bold mb-3 text-white"
+                >
+                    Community
+                </h3>
+
+                <p
+                    class="text-slate-400 text-sm leading-relaxed"
+                >
+                    Connecting students with shared passions, building
+                    professional networks, and encouraging peer support
+                    and collaboration.
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 EVENTS
+            ========================== -->
+
+            <div
+                class="bg-slate-950 border border-slate-800 p-7 rounded-xl hover:border-sky-500/40 hover:-translate-y-1 transition duration-300"
+            >
+
+                <div
+                    class="w-14 h-14 rounded-xl bg-sky-500/10 text-sky-400 text-2xl flex items-center justify-center mb-5"
+                >
+
+                    <i class="fa-solid fa-calendar-days"></i>
+
+                </div>
+
+                <h3
+                    class="text-xl font-bold mb-3 text-white"
+                >
+                    Events & Quizzes
+                </h3>
+
+                <p
+                    class="text-slate-400 text-sm leading-relaxed"
+                >
+                    Participate in mathematical competitions, quizzes,
+                    seminars, workshops, tutorials, and other exciting
+                    academic activities.
+                </p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         CALL TO ACTION
+    ====================================================== -->
+
+    <section class="border-y border-slate-800 bg-slate-950">
+
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center"
+        >
+
+            <div
+                class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-sky-500/10 text-sky-400 mb-5"
+            >
+
+                <i class="fa-solid fa-people-group text-xl"></i>
+
+            </div>
+
+            <h2
+                class="text-3xl md:text-4xl font-bold text-white mb-4"
+            >
+                Be Part of Our Community
+            </h2>
+
+            <p
+                class="max-w-xl mx-auto text-slate-400 text-sm md:text-base mb-7"
+            >
+                Join NAMSSN SAZU Chapter and become part of a community
+                committed to academic growth, collaboration, and excellence.
+            </p>
+
+            <a
+                href="contact.html"
+                class="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-600 text-white font-semibold px-7 py-3.5 rounded-lg transition duration-300"
+            >
+
+                <span>
+                    Get in Touch
+                </span>
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer
+        class="bg-slate-950 text-slate-400 py-12 border-t border-slate-800"
+    >
+
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        >
+
+            <div
+                class="grid grid-cols-1 md:grid-cols-3 gap-10"
+            >
+
+
+                <!-- =========================
+                     BRAND / ABOUT
+                ========================== -->
+
+                <div>
+
+                    <div
+                        class="flex items-center gap-3 mb-5"
+                    >
+
+                        <img
+                            src="IMAGES/IMAGES.png"
+                            alt="NAMSSN Logo"
+                            class="w-12 h-12 object-contain rounded-lg bg-white p-1"
+                        >
+
+                        <div>
+
+                            <h3
+                                class="text-white text-lg font-bold"
+                            >
+                                NAMSSN
+                            </h3>
+
+                            <p
+                                class="text-xs text-sky-400"
+                            >
+                                SAZU Chapter
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <p
+                        class="text-sm leading-relaxed"
+                    >
+                        Sa'adu Zungur University Chapter.
+                        Dedicated to advancing mathematical sciences
+                        and fostering academic excellence.
+                    </p>
+
+                </div>
+
+
+
+                <!-- =========================
+                     QUICK LINKS
+                ========================== -->
+
+                <div>
+
+                    <h3
+                        class="text-white text-lg font-bold mb-5"
+                    >
+                        Quick Links
+                    </h3>
+
+                    <ul class="space-y-3 text-sm">
+
+                        <li>
+                            <a
+                                href="index.html"
+                                class="text-sky-400 transition"
+                            >
+                                Home
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                href="about.html"
+                                class="hover:text-sky-400 transition"
+                            >
+                                About Us
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                href="events.html"
+                                class="hover:text-sky-400 transition"
+                            >
+                                Events
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                href="gallery.html"
+                                class="hover:text-sky-400 transition"
+                            >
+                                Gallery
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                href="x.html"
+                                class="hover:text-sky-400 transition"
+                            >
+                                Executives
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                href="contact.html"
+                                class="hover:text-sky-400 transition"
+                            >
+                                Contact
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <!-- =========================
+                     CONTACT INFORMATION
+                ========================== -->
+
+                <div>
+
+                    <h3
+                        class="text-white text-lg font-bold mb-5"
+                    >
+                        Contact Info
+                    </h3>
+
+
+                    <div class="space-y-4 text-sm">
+
+
+                        <!-- Location -->
+                        <div class="flex items-start gap-3">
+
+                            <i
+                                class="fa-solid fa-location-dot text-sky-400 mt-1"
+                            ></i>
+
+                            <span>
+                                Sa'adu Zungur University,
+                                Bauchi State, Nigeria
+                            </span>
+
+                        </div>
+
+
+                        <!-- Email -->
+                        <div class="flex items-start gap-3">
+
+                            <i
+                                class="fa-solid fa-envelope text-sky-400 mt-1"
+                            ></i>
+
+                            <a
+                                href="mailto:sazu-chapter@namssn.org"
+                                class="hover:text-sky-400 transition break-all"
+                            >
+                                sazu-chapter@namssn.org
+                            </a>
+
+                        </div>
+
+
+                        <!-- Phone -->
+                        <div class="flex items-center gap-3">
+
+                            <i
+                                class="fa-solid fa-phone text-sky-400"
+                            ></i>
+
+                            <a
+                                href="tel:+2349022488805"
+                                class="hover:text-sky-400 transition"
+                            >
+                                +234 902 248 8805
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 COPYRIGHT
+            ========================== -->
+
+            <div
+                class="mt-10 pt-8 border-t border-slate-900 text-center text-xs"
+            >
+
+                <p>
+                    &copy; 2026 NAMSSN SAZU Chapter.
+                    All rights reserved.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        const menuButton = document.getElementById("menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        menuButton.addEventListener("click", () => {
+
+            mobileMenu.classList.toggle("active");
+
+            const icon = menuButton.querySelector("i");
+
+            if (mobileMenu.classList.contains("active")) {
+
+                icon.classList.remove("fa-bars");
+                icon.classList.add("fa-xmark");
+
+            } else {
+
+                icon.classList.remove("fa-xmark");
+                icon.classList.add("fa-bars");
+
+            }
+
+        });
+
+
+        // Close mobile menu when a link is clicked
+
+        const mobileLinks =
+            mobileMenu.querySelectorAll("a");
+
+        mobileLinks.forEach(link => {
+
+            link.addEventListener("click", () => {
+
+                mobileMenu.classList.remove("active");
+
+                const icon =
+                    menuButton.querySelector("i");
+
+                icon.classList.remove("fa-xmark");
+                icon.classList.add("fa-bars");
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>
