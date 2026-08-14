@@ -4,147 +4,271 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Events - NAMSSN SAZU Chapter</title>
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Typography: Space Grotesk (display, geometric — nods to the math subject) + Inter (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --accent: #38bdf8;      /* sky-400 */
+            --accent-dim: #0ea5e9;  /* sky-500 */
+            --violet: #a78bfa;      /* workshop tag */
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; }
+        .font-display { font-family: 'Space Grotesk', sans-serif; }
+
+        /* faint graph-paper texture, on-brand for a mathematics society without being loud */
+        .grid-texture {
+            background-image:
+                linear-gradient(to right, rgba(148,163,184,0.06) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(148,163,184,0.06) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+        /* visible keyboard focus everywhere, not just mouse hover */
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        .event-card {
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+        .event-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(56, 189, 248, 0.35);
+            box-shadow: 0 12px 30px -12px rgba(0,0,0,0.5);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .event-card, .event-card:hover { transition: none; transform: none; }
+            html { scroll-behavior: auto; }
+        }
+
+        #mobile-menu { transition: max-height 0.3s ease, opacity 0.25s ease; }
+
+        .filter-btn[aria-pressed="true"] {
+            background-color: var(--accent);
+            color: #020617;
+            border-color: var(--accent);
+        }
+    </style>
 </head>
-<body class="bg-slate-900 text-slate-100 font-sans antialiased">
+<body class="bg-slate-900 text-slate-100 antialiased">
 
     <!-- Header / Navbar -->
-    <header class="bg-slate-950 border-b border-slate-800 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <span class="text-xl font-extrabold tracking-wider text-white">NAMSSN <span class="text-sky-400">SAZU</span></span>
-            </div>
-            
-            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
-                <a href="index.html" class="hover:text-sky-400 transition">Home</a>
-                <a href="about.html" class="hover:text-sky-400 transition">About</a>
-                <a href="events.html" class="text-sky-400 transition">Events</a>
-                <a href="gallery.html" class="hover:text-sky-400 transition">Gallery</a>
-                <a href="executives.html" class="hover:text-sky-400 transition">Executives</a>
-                <a href="contact.html" class="hover:text-sky-400 transition">Contact</a>
+    <header class="bg-slate-950/90 backdrop-blur border-b border-slate-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-2.5 md:space-x-3 shrink-0">
+                <img src="IMAGES/images.png" alt="NAMSSN logo" class="h-9 w-9 md:h-10 md:w-10 rounded-full object-cover">
+                <span class="font-display text-lg md:text-xl font-bold tracking-tight text-white">NAMSSN <span class="text-sky-400">SAZU</span></span>
+            </a>
+
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+                <a href="index.html" class="hover:text-sky-400 transition-colors">Home</a>
+                <a href="about.html" class="hover:text-sky-400 transition-colors">About</a>
+                <a href="events.html" class="text-sky-400" aria-current="page">Events</a>
+                <a href="gallery.html" class="hover:text-sky-400 transition-colors">Gallery</a>
+                <a href="executives.html" class="hover:text-sky-400 transition-colors">Executives</a>
+                <a href="contact.html" class="hover:text-sky-400 transition-colors">Contact</a>
             </nav>
 
-            <div class="md:hidden flex items-center">
-                <button class="text-slate-400 hover:text-white focus:outline-none">
-                    <i class="fa-solid fa-bars text-xl"></i>
-                </button>
-            </div>
+            <button id="menu-toggle" class="md:hidden flex items-center justify-center w-10 h-10 -mr-2 text-slate-300 hover:text-white" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle navigation menu">
+                <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+            </button>
         </div>
+
+        <!-- Mobile menu -->
+        <nav id="mobile-menu" class="md:hidden overflow-hidden max-h-0 opacity-0 border-t border-slate-800 bg-slate-950">
+            <div class="px-4 py-3 flex flex-col text-sm font-medium text-slate-300">
+                <a href="index.html" class="py-3 border-b border-slate-800/70 hover:text-sky-400">Home</a>
+                <a href="about.html" class="py-3 border-b border-slate-800/70 hover:text-sky-400">About</a>
+                <a href="events.html" class="py-3 border-b border-slate-800/70 text-sky-400">Events</a>
+                <a href="gallery.html" class="py-3 border-b border-slate-800/70 hover:text-sky-400">Gallery</a>
+                <a href="executives.html" class="py-3 border-b border-slate-800/70 hover:text-sky-400">Executives</a>
+                <a href="contact.html" class="py-3 hover:text-sky-400">Contact</a>
+            </div>
+        </nav>
     </header>
 
     <!-- Page Header -->
-    <section class="bg-slate-950 py-16 border-b border-slate-800 text-center">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-4">
-                Upcoming & Past <span class="text-sky-400">Events</span>
+    <section class="relative grid-texture bg-slate-950 py-14 md:py-20 border-b border-slate-800 text-center overflow-hidden">
+        <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <span class="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-sky-400 mb-4">Chapter Calendar</span>
+            <h1 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4 text-white">
+                Upcoming &amp; Past Events
             </h1>
-            <p class="max-w-xl mx-auto text-slate-400 text-sm md:text-base">
-                Stay updated with academic competitions, workshops, tutorials, and social gatherings hosted by NAMSSN Sa'adu Zungur University Chapter.
+            <p class="max-w-xl mx-auto text-slate-400 text-sm md:text-base leading-relaxed">
+                Academic competitions, workshops, tutorials, and gatherings hosted by the NAMSSN Sa'adu Zungur University Chapter.
             </p>
         </div>
     </section>
 
     <!-- Events Content Section -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+
+        <!-- Filters -->
+        <div class="flex flex-wrap gap-2 mb-8 md:mb-10" role="group" aria-label="Filter events">
+            <button type="button" data-filter="all" aria-pressed="true" class="filter-btn text-xs sm:text-sm font-medium px-4 py-2 rounded-full border border-slate-700 text-slate-300 hover:border-sky-400/50 transition-colors">All Events</button>
+            <button type="button" data-filter="upcoming" aria-pressed="false" class="filter-btn text-xs sm:text-sm font-medium px-4 py-2 rounded-full border border-slate-700 text-slate-300 hover:border-sky-400/50 transition-colors">Upcoming</button>
+            <button type="button" data-filter="workshop" aria-pressed="false" class="filter-btn text-xs sm:text-sm font-medium px-4 py-2 rounded-full border border-slate-700 text-slate-300 hover:border-sky-400/50 transition-colors">Workshops</button>
+            <button type="button" data-filter="past" aria-pressed="false" class="filter-btn text-xs sm:text-sm font-medium px-4 py-2 rounded-full border border-slate-700 text-slate-300 hover:border-sky-400/50 transition-colors">Past</button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-8">
+
             <!-- Event Card 1 -->
-            <div class="bg-slate-950 border border-slate-800 rounded-xl overflow-hidden shadow-lg flex flex-col justify-between p-6">
+            <article data-category="upcoming" class="event-card bg-slate-950 border border-slate-800 rounded-xl overflow-hidden shadow-lg flex flex-col justify-between p-5 md:p-6">
                 <div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="bg-sky-500/10 text-sky-400 text-xs font-semibold px-3 py-1 rounded-full border border-sky-500/20">Upcoming</span>
-                        <span class="text-slate-400 text-xs"><i class="fa-regular fa-calendar-days mr-1"></i> October 25, 2026</span>
+                    <div class="flex items-start justify-between gap-3 mb-4">
+                        <span class="bg-sky-500/10 text-sky-400 text-xs font-semibold px-3 py-1 rounded-full border border-sky-500/20 whitespace-nowrap">Upcoming</span>
+                        <span class="text-slate-400 text-xs text-right leading-tight"><i class="fa-regular fa-calendar-days mr-1"></i>Oct 25, 2026</span>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Annual Mathematics Quiz Competition</h3>
-                    <p class="text-slate-400 text-sm mb-4">Test your analytical skills and battle for top honors against fellow mathematics enthusiasts across various levels.</p>
+                    <h3 class="font-display text-lg md:text-xl font-bold text-white mb-2">Annual Mathematics Quiz Competition</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">Test your analytical skills and compete for top honors against fellow mathematics enthusiasts across all levels.</p>
                 </div>
-                <div class="border-t border-slate-800 pt-4 flex items-center justify-between text-xs text-slate-400">
-                    <span><i class="fa-solid fa-location-dot mr-1"></i> Main Auditorium, SAZU</span>
-                    <a href="contact.html" class="text-sky-400 hover:underline font-medium">Register Now &rarr;</a>
+                <div class="border-t border-slate-800 pt-4 flex items-center justify-between text-xs text-slate-400 gap-2">
+                    <span class="truncate"><i class="fa-solid fa-location-dot mr-1 text-sky-400/80"></i>Main Auditorium, SAZU</span>
+                    <a href="contact.html" class="text-sky-400 hover:underline font-medium whitespace-nowrap">Register &rarr;</a>
                 </div>
-            </div>
+            </article>
 
             <!-- Event Card 2 -->
-            <div class="bg-slate-950 border border-slate-800 rounded-xl overflow-hidden shadow-lg flex flex-col justify-between p-6">
+            <article data-category="workshop" class="event-card bg-slate-950 border border-slate-800 rounded-xl overflow-hidden shadow-lg flex flex-col justify-between p-5 md:p-6">
                 <div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="bg-sky-500/10 text-sky-400 text-xs font-semibold px-3 py-1 rounded-full border border-sky-500/20">Workshop</span>
-                        <span class="text-slate-400 text-xs"><i class="fa-regular fa-calendar-days mr-1"></i> November 10, 2026</span>
+                    <div class="flex items-start justify-between gap-3 mb-4">
+                        <span class="bg-violet-500/10 text-violet-300 text-xs font-semibold px-3 py-1 rounded-full border border-violet-500/20 whitespace-nowrap">Workshop</span>
+                        <span class="text-slate-400 text-xs text-right leading-tight"><i class="fa-regular fa-calendar-days mr-1"></i>Nov 10, 2026</span>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Introduction to Mathematical Modeling</h3>
-                    <p class="text-slate-400 text-sm mb-4">A practical seminar detailing how real-world physical and financial systems are translated into mathematical equations.</p>
+                    <h3 class="font-display text-lg md:text-xl font-bold text-white mb-2">Introduction to Mathematical Modeling</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">A practical seminar on how real-world physical and financial systems are translated into mathematical equations.</p>
                 </div>
-                <div class="border-t border-slate-800 pt-4 flex items-center justify-between text-xs text-slate-400">
-                    <span><i class="fa-solid fa-location-dot mr-1"></i> Lecture Hall 2</span>
-                    <a href="contact.html" class="text-sky-400 hover:underline font-medium">Learn More &rarr;</a>
+                <div class="border-t border-slate-800 pt-4 flex items-center justify-between text-xs text-slate-400 gap-2">
+                    <span class="truncate"><i class="fa-solid fa-location-dot mr-1 text-sky-400/80"></i>Lecture Hall 2</span>
+                    <a href="contact.html" class="text-sky-400 hover:underline font-medium whitespace-nowrap">Learn More &rarr;</a>
                 </div>
-            </div>
+            </article>
 
             <!-- Event Card 3 -->
-            <div class="bg-slate-950 border border-slate-800 rounded-xl overflow-hidden shadow-lg flex flex-col justify-between p-6">
+            <article data-category="past" class="event-card bg-slate-950 border border-slate-800 rounded-xl overflow-hidden shadow-lg flex flex-col justify-between p-5 md:p-6 opacity-80">
                 <div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="bg-slate-800 text-slate-400 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Past</span>
-                        <span class="text-slate-400 text-xs"><i class="fa-regular fa-calendar-days mr-1"></i> August 15, 2026</span>
+                    <div class="flex items-start justify-between gap-3 mb-4">
+                        <span class="bg-slate-800 text-slate-400 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700 whitespace-nowrap">Past</span>
+                        <span class="text-slate-400 text-xs text-right leading-tight"><i class="fa-regular fa-calendar-days mr-1"></i>Aug 15, 2026</span>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Freshers Welcome & Orientation</h3>
-                    <p class="text-slate-400 text-sm mb-4">Welcoming new students into the Department of Mathematical Sciences and introducing them to departmental resources.</p>
+                    <h3 class="font-display text-lg md:text-xl font-bold text-white mb-2">Freshers Welcome &amp; Orientation</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">Welcoming new students into the Department of Mathematical Sciences and introducing them to departmental resources.</p>
                 </div>
-                <div class="border-t border-slate-800 pt-4 flex items-center justify-between text-xs text-slate-400">
-                    <span><i class="fa-solid fa-location-dot mr-1"></i> Departmental Complex</span>
-                    <span class="text-slate-500">Concluded</span>
+                <div class="border-t border-slate-800 pt-4 flex items-center justify-between text-xs text-slate-400 gap-2">
+                    <span class="truncate"><i class="fa-solid fa-location-dot mr-1"></i>Departmental Complex</span>
+                    <span class="text-slate-500 whitespace-nowrap">Concluded</span>
                 </div>
-            </div>
+            </article>
 
             <!-- Event Card 4 -->
-            <div class="bg-slate-950 border border-slate-800 rounded-xl overflow-hidden shadow-lg flex flex-col justify-between p-6">
+            <article data-category="past" class="event-card bg-slate-950 border border-slate-800 rounded-xl overflow-hidden shadow-lg flex flex-col justify-between p-5 md:p-6 opacity-80">
                 <div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="bg-slate-800 text-slate-400 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Past</span>
-                        <span class="text-slate-400 text-xs"><i class="fa-regular fa-calendar-days mr-1"></i> June 02, 2026</span>
+                    <div class="flex items-start justify-between gap-3 mb-4">
+                        <span class="bg-slate-800 text-slate-400 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700 whitespace-nowrap">Past</span>
+                        <span class="text-slate-400 text-xs text-right leading-tight"><i class="fa-regular fa-calendar-days mr-1"></i>Jun 02, 2026</span>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">End of Semester Tutorial Camp</h3>
-                    <p class="text-slate-400 text-sm mb-4">Intensive revision classes covering complex analysis, abstract algebra, and differential equations.</p>
+                    <h3 class="font-display text-lg md:text-xl font-bold text-white mb-2">End of Semester Tutorial Camp</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">Intensive revision classes covering complex analysis, abstract algebra, and differential equations.</p>
                 </div>
-                <div class="border-t border-slate-800 pt-4 flex items-center justify-between text-xs text-slate-400">
-                    <span><i class="fa-solid fa-location-dot mr-1"></i> Math Computer Lab</span>
-                    <span class="text-slate-500">Concluded</span>
+                <div class="border-t border-slate-800 pt-4 flex items-center justify-between text-xs text-slate-400 gap-2">
+                    <span class="truncate"><i class="fa-solid fa-location-dot mr-1"></i>Math Computer Lab</span>
+                    <span class="text-slate-500 whitespace-nowrap">Concluded</span>
                 </div>
-            </div>
+            </article>
 
+        </div>
+
+        <!-- Empty state, shown by JS when a filter has no matches -->
+        <div id="empty-state" class="hidden text-center py-16 text-slate-500">
+            <i class="fa-regular fa-calendar-xmark text-3xl mb-3 block"></i>
+            <p class="text-sm">No events in this category yet. Check back soon.</p>
         </div>
     </main>
 
     <!-- Footer -->
     <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-10">
             <div>
-                <h3 class="text-white text-lg font-bold mb-4">NAMSSN SAZU</h3>
-                <p class="text-sm">Sa'adu Zungur University Chapter. Dedicated to advancing mathematical sciences and fostering academic excellence.</p>
+                <h3 class="font-display text-white text-lg font-bold mb-4">NAMSSN SAZU</h3>
+                <p class="text-sm leading-relaxed">Sa'adu Zungur University Chapter. Dedicated to advancing mathematical sciences and fostering academic excellence.</p>
             </div>
             <div>
-                <h3 class="text-white text-lg font-bold mb-4">Quick Links</h3>
+                <h3 class="font-display text-white text-lg font-bold mb-4">Quick Links</h3>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="index.html" class="hover:text-sky-400 transition">Home</a></li>
-                    <li><a href="about.html" class="hover:text-sky-400 transition">About Us</a></li>
-                    <li><a href="events.html" class="hover:text-sky-400 transition">Events</a></li>
-                    <li><a href="x.html" class="hover:text-sky-400 transition">Executives</a></li>
-                    <li><a href="contact.html" class="hover:text-sky-400 transition">Contact</a></li>
+                    <li><a href="index.html" class="hover:text-sky-400 transition-colors">Home</a></li>
+                    <li><a href="about.html" class="hover:text-sky-400 transition-colors">About Us</a></li>
+                    <li><a href="events.html" class="hover:text-sky-400 transition-colors">Events</a></li>
+                    <li><a href="executives.html" class="hover:text-sky-400 transition-colors">Executives</a></li>
+                    <li><a href="contact.html" class="hover:text-sky-400 transition-colors">Contact</a></li>
                 </ul>
             </div>
-            <div>
-                <h3 class="text-white text-lg font-bold mb-4">Contact Info</h3>
+            <div class="sm:col-span-2 md:col-span-1">
+                <h3 class="font-display text-white text-lg font-bold mb-4">Contact Info</h3>
                 <p class="text-sm mb-2">Sa'adu Zungur University, Bauchi State</p>
-                <p class="text-sm">Email: <a href="mailto:sazu-chapter@namssn.org" class="text-sky-400 hover:underline">sazu-chapter@namssn.org</a></p>
+                <p class="text-sm break-words">Email: <a href="mailto:sazu-chapter@namssn.org" class="text-sky-400 hover:underline">sazu-chapter@namssn.org</a></p>
             </div>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-8 border-t border-slate-900 text-center text-xs">
             &copy; 2026 NAMSSN SAZU Chapter. All rights reserved.
         </div>
     </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        menuToggle.addEventListener('click', () => {
+            const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', String(!isOpen));
+            if (isOpen) {
+                mobileMenu.style.maxHeight = '0px';
+                mobileMenu.style.opacity = '0';
+                menuIcon.classList.replace('fa-xmark', 'fa-bars');
+            } else {
+                mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+                mobileMenu.style.opacity = '1';
+                menuIcon.classList.replace('fa-bars', 'fa-xmark');
+            }
+        });
+
+        // Event filtering
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('[data-category]');
+        const emptyState = document.getElementById('empty-state');
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => b.setAttribute('aria-pressed', 'false'));
+                btn.setAttribute('aria-pressed', 'true');
+
+                const filter = btn.dataset.filter;
+                let visibleCount = 0;
+
+                cards.forEach(card => {
+                    const match = filter === 'all' || card.dataset.category === filter;
+                    card.style.display = match ? '' : 'none';
+                    if (match) visibleCount++;
+                });
+
+                emptyState.classList.toggle('hidden', visibleCount !== 0);
+            });
+        });
+    </script>
 
 </body>
 </html>
