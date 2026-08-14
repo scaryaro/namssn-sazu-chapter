@@ -24,6 +24,29 @@
       --accent-bright: #6e9bd6;
     }
 
+    html.light-theme {
+      --ink: #f6f8fb;
+      --ink-soft: #ffffff;
+      --panel: #ffffff;
+      --line: #dbe2ea;
+      --paper: #111827;
+      --paper-dim: #5f6b7a;
+      --accent: #315f9f;
+      --accent-bright: #315f9f;
+    }
+
+    html.light-theme .grid-texture {
+      background-image:
+        linear-gradient(rgba(17, 24, 39, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(17, 24, 39, 0.045) 1px, transparent 1px);
+    }
+
+    html.light-theme .btn-primary { color: #ffffff; }
+    html.light-theme .hero-overlay { background: linear-gradient(180deg, rgba(246,248,251,0.55), var(--ink) 90%), url('images/group.jpeg') center/cover !important; opacity: 0.28 !important; }
+    html.light-theme #theme-toggle:hover { background: #eef2f7 !important; }
+    #theme-toggle:hover { background: rgba(255,255,255,0.06) !important; }
+    body, .card, header, footer, section, main { transition: background-color .25s ease, color .25s ease, border-color .25s ease; }
+
     html { scroll-behavior: smooth; }
 
     body {
@@ -135,9 +158,16 @@
           <a href="contact.html" class="nav-link">Contact</a>
         </nav>
 
-        <button id="menu-button" type="button" aria-label="Open navigation menu" class="md:hidden" style="color: var(--paper);">
-          <i class="fa-solid fa-bars text-2xl"></i>
-        </button>
+        <div class="flex items-center gap-2">
+          <button id="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch theme"
+            class="w-11 h-11 rounded-lg flex items-center justify-center transition-all duration-200"
+            style="color: var(--paper); border: 1px solid var(--line); background: var(--panel);">
+            <i id="theme-icon" class="fa-solid fa-sun"></i>
+          </button>
+          <button id="menu-button" type="button" aria-label="Open navigation menu" class="md:hidden" style="color: var(--paper);">
+            <i class="fa-solid fa-bars text-2xl"></i>
+          </button>
+        </div>
       </div>
 
       <div id="mobile-menu" class="md:hidden border-t py-4" style="border-color: var(--line);">
@@ -157,7 +187,7 @@
 
   <!-- Hero -->
   <section class="grid-texture relative py-16 sm:py-24 md:py-36" style="background: var(--ink);">
-    <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(14,20,32,0.4), var(--ink) 90%), url('images/group.jpeg') center/cover; opacity: 0.35;"></div>
+    <div class="hero-overlay absolute inset-0" style="background: linear-gradient(180deg, rgba(14,20,32,0.4), var(--ink) 90%), url('images/group.jpeg') center/cover; opacity: 0.35;"></div>
 
     <div class="relative max-w-4xl mx-auto px-5 sm:px-6 lg:px-8 text-center">
       <div class="inline-flex items-center gap-2 px-3.5 py-1.5 mb-6 sm:mb-7 rounded-full text-xs sm:text-sm" style="border: 1px solid var(--line); color: var(--accent-bright);">
@@ -326,6 +356,28 @@
         icon.classList.add("fa-bars");
         icon.classList.remove("fa-xmark");
       });
+    });
+
+    // Theme switcher: remembers the user's choice across visits.
+    const themeToggle = document.getElementById("theme-toggle");
+    const themeIcon = document.getElementById("theme-icon");
+    const savedTheme = localStorage.getItem("namssn-theme");
+
+    function applyTheme(theme) {
+      const light = theme === "light";
+      document.documentElement.classList.toggle("light-theme", light);
+      themeIcon.classList.toggle("fa-sun", !light);
+      themeIcon.classList.toggle("fa-moon", light);
+      themeToggle.setAttribute("aria-label", light ? "Switch to dark theme" : "Switch to light theme");
+      themeToggle.setAttribute("title", light ? "Switch to dark theme" : "Switch to light theme");
+    }
+
+    applyTheme(savedTheme || "dark");
+
+    themeToggle.addEventListener("click", () => {
+      const nextTheme = document.documentElement.classList.contains("light-theme") ? "dark" : "light";
+      localStorage.setItem("namssn-theme", nextTheme);
+      applyTheme(nextTheme);
     });
   </script>
 
